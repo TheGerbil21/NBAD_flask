@@ -8,6 +8,7 @@
 {% block body %}
     <!- Try building a new body here, bootstrap is a wise choice ->
     <div class="px-5 py-5 mx-auto">
+<<<<<<< HEAD
         <h1 class="text-primary"><strong>Stubby Body</strong></h1>
         My schedule I am trying to fit for the week
         <table>
@@ -42,6 +43,47 @@
                   <td>Review all work of the day</td>
                 </tr>
               </table>
+=======
+
+        <h1 class="text-primary"><strong>About Me</strong></h1>
+        <p class="text-secondary">Hello, my name is Jeffrey Lee and I'm a senior at Del Norte High School. I've always wanted to learn about Computer Science, and have been learning so many interesting concepts from this class. I'm super interested in majoring in mechanical engineering, and this class will help me achieve my goals as well as teach me problem solving skills that will be useful in anything I pursue in the future.</p>
+        <p class="text-secondary">Here is my class schedule for school this year:</p>
+        <table>
+            <tr>
+              <th>Trimester 1</th>
+              <th>Trimester 2</th>
+              <th>Trimester 3</th>
+            </tr>
+            <tr>
+              <td>AP Statistics 1</td>
+              <td>AP Statistics 2</td>
+              <td>AP Statistics Seminar</td>
+            </tr>
+            <tr>
+              <td>Expository Read/Write 1</td>
+              <td>Expository Read/Write 2</td>
+              <td>Data Science 1</td>
+            </tr>
+            <tr>
+              <td>AP Computer Science Principles 1</td>
+              <td>AP Computer Science Principles 2</td>
+              <td>Honors Principles of Engineering 2</td>
+            </tr>
+            <tr>
+              <td>Honors Principles of Engineering 1</td>
+              <td>Economics (Online)</td>
+              <td>Off Roll Period 4</td>
+            </tr>
+            <tr>
+              <td>Civics (Online)</td>
+              <td>Off Roll Period 5</td>
+              <td>Off Roll Period 5</td>
+            </tr>
+          </table>
+          <img src="{{ url_for('static', filename='assets/imageone.jpg') }}" alt="Python Development" height="345">
+          <p class="text-secondary">A nice picture of me taken at the top of Yosemite Half Dome peak. I'm excited to learn all these new avenues of computer science from the remainder of the trimester!</p>
+       
+>>>>>>> 26361b5bc45270d94aaab594e517c35b2c152338
     </div>
 {% endblock %}
 
