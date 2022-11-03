@@ -1,5 +1,4 @@
-
-
+from flask import Flask
 app = Flask(__name__)
 app.config["DEBUG"] = True
 import requests  # used for testing 
@@ -158,10 +157,4 @@ def home():
 <p>A prototype API for distant reading of science fiction novels.</p>'''
 
 
-# A route to return all of the available entries in our catalog.
-@app.route('/api/v1/resources/nbateam_list/all', methods=['GET'])
-def api_all():
 
-
-if __name__ == 'main':
-    app.run()
