@@ -1,7 +1,7 @@
 import flask
 from flask import Blueprint, jsonify  # jsonify creates an endpoint response object
 from flask_restful import Api, Resource # used for REST API building
-app = flask.Flask(NBAD_flask)
+app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 import requests  # used for testing 
 import random
