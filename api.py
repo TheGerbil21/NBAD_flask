@@ -164,4 +164,5 @@ def home():
 def api_all():
     return jsonify(nbateam_list)
 
-app.run()
+if __name__ == 'main':
+    app.run()
