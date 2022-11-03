@@ -149,3 +149,16 @@ nbateam_data = int(test_text)
 
 # Prints in the console the variable as requested
 printnbateam ("The team you entered is: ", test_team)
+
+@app.route('/', methods=['GET'])
+def home():
+    return '''<h1>Distant Reading Archive</h1>
+<p>A prototype API for distant reading of science fiction novels.</p>'''
+
+
+# A route to return all of the available entries in our catalog.
+@app.route('/api/v1/resources/nbateam/all', methods=['GET'])
+def api_all():
+    return jsonify(nbateams)
+
+app.run()
