@@ -1,5 +1,8 @@
+import flask
 from flask import Blueprint, jsonify  # jsonify creates an endpoint response object
 from flask_restful import Api, Resource # used for REST API building
+app = flask.Flask(NBAD_flask)
+app.config["DEBUG"] = True
 import requests  # used for testing 
 import random
 nbateam_data = []
@@ -157,8 +160,8 @@ def home():
 
 
 # A route to return all of the available entries in our catalog.
-@app.route('/api/v1/resources/nbateam/all', methods=['GET'])
+@app.route('/api/v1/resources/nbateam_list/all', methods=['GET'])
 def api_all():
-    return jsonify(nbateams)
+    return jsonify(nbateam_list)
 
 app.run()
