@@ -2,7 +2,7 @@
 from flask import render_template  # import render_template from "public" flask libraries
 # import "packages" from "this" project
 from __init__ import app  # Definitions initialization
-# from api import joke_api # Blueprint import api definition
+from api import joke_api # Blueprint import api definition
 from bp_projects.projects import app_projects # Blueprint directory import projects definition
 
 # app.register_blueprint(app_api) # register api routes
@@ -23,4 +23,7 @@ def stub():
 
 # this runs the application on the development server
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
+
+
+

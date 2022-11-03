@@ -1,7 +1,3 @@
-from flask import Flask
-app = Flask(__name__)
-app.config["DEBUG"] = True
-import requests  # used for testing 
 import random
 nbateam_data = []
 nbateam_list = [
@@ -150,11 +146,3 @@ nbateam_data = int(test_text)
 
 # Prints in the console the variable as requested
 printnbateam ("The team you entered is: ", test_team)
-
-@app.route('/', methods=['GET'])
-def home():
-    return '''<h1>Distant Reading Archive</h1>
-<p>A prototype API for distant reading of science fiction novels.</p>'''
-
-
-
