@@ -1,148 +1,97 @@
+from flask import Blueprint, jsonify  # jsonify creates an endpoint response object
+from flask_restful import Api, Resource # used for REST API building
+import requests  # used for testing 
 import random
-nbateam_data = []
-nbateam_list = [
-    "NBA",
-    "Philadelphia 76ers",
-    "Milwaukee Bucks",
-    "Boston Celtics",
-    "Miami Heat",
-    "LA Clippers",
-    "LA Lakers",
-    "OKC Thunder",
-    "Brooklyn Nets",
-    "Minnesota Timberwolves",
-    "Golden State Warriors",
-    "Phoenix Suns",
-    "Chicago Bulls",
-    "Orlando Magic",
-    "Dallas Mavericks",
-    "San Antonio Spurs",
-    "Atlanta Hawks",
-    "Washington Wizards",
-    "Houston Rockets",
-    "Sacramento Kings",
-    "Indiana Pacers",
-    "Utah Jazz",
-    "New Orleans Pelicans",
-    "New York Knicks",
-    "Memphis Grizzlies",
-    "Portland Trailblazers",
-    "Toronto Raptors",
-    "Cleveland Cavaliers",
-    "Denver Nuggets",
-    "Charlotte Hornets",
-    "Detroit Pistons",
+
+from model_nbateams import *
+
+nba_api = Blueprint('nba_api', __name__,
+                   url_prefix='/api/teams')
+
+# API generator https://flask-restful.readthedocs.io/en/latest/api.html#id1
+api = Api(nba_api)
+
+class JokesAPI:
+    # not implemented
+    class _Create(Resource):
+        def post(self, joke):
+            pass
+            
+    # getJokes()
+    class _Read(Resource):
+        def get(self):
+            return jsonify(getnbateams())
+
+    # getJoke(id)
+    class _ReadID(Resource):
+        def get(self, id):
+            return jsonify(getnbateam(id))
+
+    # getRandomJoke()
+    class _ReadRandom(Resource):
+        def get(self):
+            return jsonify(getRandomnbateam())
     
-]
+    # getRandomJoke()
+    class _ReadCount(Resource):
+        def get(self):
+            count = countnbateams()
+            countMsg = {'count': count}
+            return jsonify(countMsg)
 
-def test_text():
-    nbateam_data
-def test_team():
-    nbateam_data
+    # put method: addJokeHaHa
+    class _UpdateLike(Resource):
+        def put(self, id):
+            addnbateamlike(id)
+            return jsonify(getnbateam(id))
 
-# Initialize nbateams
-def nbateams():
-    # setup nbateam into a dictionary with team, info, next
-    item_id = 0
-    for item in nbateam_list:
-        nbateam_data.append({"id": item_id, "team": item, "like": 0, "dislike": 0})
-        item_id += 1
-    # prime some next responses
-    for i in range(200):
-        id = getRandomnbateam()['id']
-        addnbateamlike(id)
-    # prime some next responses
-    for i in range(50):
-        id = getRandomnbateam()['id']
-        addnbateamlike(id)
-        
-# Return all jokes from nbateam_data
-def getnbateam():
-    return(nbateam_data)
+    # put method: addJokeBooHoo
+    class _UpdateJeer(Resource):
+        def put(self, id):
+            addnbateamdislike(id)
+            return jsonify(getnbateam(id))
 
-# nbateam getter
-def getnbateam(id):
-    return(nbateam_data[id])
-
-# Return next team from nbateam_data
-def getRandomnbateam():
-    return(random.choice(nbateam_data))
-
-# Liked nbateam
-def likednbateam():
-    best = 0
-    bestID = -1
-    for id in getnbateam():
-        if id['like'] > best:
-            best = id['like']
-            bestID = id['team']
-
-    return nbateam_data[bestID]
+    # building RESTapi resources/interfaces, these routes are added to Web Server
+    api.add_resource(_Create, '/create/<string:joke>')
+    api.add_resource(_Read, '/')
+    api.add_resource(_ReadID, '/<int:id>')
+    api.add_resource(_ReadRandom, '/random')
+    api.add_resource(_ReadCount, '/count')
+    api.add_resource(_UpdateLike, '/like/<int:id>')
+    api.add_resource(_UpdateJeer, '/jeer/<int:id>')
     
-#  Disliked nbatam
-def dislikednbateam():
-    worst = 0
-    worstID = -1
-    for id in getnbateam():
-        if id['dislike'] > worst:
-            worst = id['dislike']
-            worstID = id['id']
-    return nbateam_data[worstID]
-
-# Add to like for requested id
-def addnbateamlike(id):
-    nbateam_data[id]['like'] = nbateam_data[id]['like'] + 1
-    return nbateam_data[id]['like']
-
-# Add to dislike for requested id
-def addnbateamlike(id):
-    nbateam_data[id]['dislike'] = nbateam_data[id]['dislike'] + 1
-    return nbateam_data[id]['dislike']
-
-# Pretty Print nbateam
-def printnbateam(nbateam):
-    print(nbateam['id'], nbateam['team'], "\n", "like:", nbateam['like'], "\n", "dislike:", nbateam['dislike'], "\n")
-
-# Number of teams  
-def countnbateams():
-    return len(nbateam_data)
-
-# Test nbateam Model
 if __name__ == "__main__": 
-    nbateams()  # initialize nbateam
+    server = "http://127.0.0.1:5000" # run local
+    # server = 'https://flask.nighthawkcodingsociety.com' # run from web
+    url = server + "/api/teams"
+    responses = []  # responses list
 
-    #  most liked and most disliked
-    # best = likednbateam()
+    # get count of jokes on server
+    count_response = requests.get(url+"/count")
+    count_json = count_response.json()
+    count = count_json['count']
 
-    #print("like", best['like'])
-    #printnbateam(best)
-    # worst = dislikednbateam()
-    #print("dislike"), worst['dislike']
-    #printnbateam(worst)
-    
-    # Random team
-    
-    
-       # Random team
-    print("Get team 3")
-    printnbateam(getnbateam(3))
-    
-    # Random team
-    print("Random team")
-    printnbateam(getRandomnbateam())
-    
-    
-    # Count of teams
-    printnbateam("team name: " + str(getnbateam()))
+    # update likes/dislikes test sequence
+    num = str(random.randint(0, count-1)) # test a random record
+    responses.append(
+        requests.get(url+"/"+num)  # read joke by id
+        ) 
+    responses.append(
+        requests.put(url+"/like/"+num) # add to like count
+        ) 
+    responses.append(
+        requests.put(url+"/jeer/"+num) # add to jeer count
+        ) 
 
- # An input is requested and stored in a variable
-nbateam_data = input ("Enter a team: ")
+    # obtain a random joke
+    responses.append(
+        requests.get(url+"/random")  # read a random joke
+        ) 
 
-# Converts the string into an integer. If you need
-# to convert the user input into the decimal format,
-# the float() function is used instead of int()
-
-nbateam_data = int(test_text)
-
-# Prints in the console the variable as requested
-printnbateam ("The team you entered is: ", test_team)
+    # cycle through responses
+    for response in responses:
+        print(response)
+        try:
+            print(response.json())
+        except:
+            print("unknown error")
