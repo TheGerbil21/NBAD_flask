@@ -1,5 +1,6 @@
 import random
-nbateam_data = ["NBA",
+nbateam_data = [
+    "NBA",
     "Philadelphia 76ers",
     "Milwaukee Bucks",
     "Boston Celtics",
@@ -29,7 +30,10 @@ nbateam_data = ["NBA",
     "Cleveland Cavaliers",
     "Denver Nuggets",
     "Charlotte Hornets",
-    "Detroit Pistons",]
+    "Detroit Pistons",
+    
+]
+
 nbateam_list = [
     "NBA",
     "Philadelphia 76ers",
