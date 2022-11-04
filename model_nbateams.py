@@ -1,6 +1,5 @@
 import random
-nbateams_data = [
-    "NBA",
+nbateam_data = ["NBA",
     "Philadelphia 76ers",
     "Milwaukee Bucks",
     "Boston Celtics",
@@ -30,8 +29,7 @@ nbateams_data = [
     "Cleveland Cavaliers",
     "Denver Nuggets",
     "Charlotte Hornets",
-    "Detroit Pistons",
-]
+    "Detroit Pistons",]
 nbateam_list = [
     "NBA",
     "Philadelphia 76ers",
@@ -68,16 +66,16 @@ nbateam_list = [
 ]
 
 def test_text():
-    nbateams_data
+    nbateam_data
 def test_team():
-    nbateams_data
+    nbateam_data
 
 # Initialize nbateams
-def initNbateams():
+def nbateams():
     # setup nbateam into a dictionary with team, info, next
     item_id = 0
     for item in nbateam_list:
-        nbateams_data.append({"id": item_id, "team": item, "like": 0, "dislike": 0})
+        nbateam_data.append({"id": item_id, "team": item, "like": 0, "dislike": 0})
         item_id += 1
     # prime some next responses
     for i in range(200):
@@ -87,20 +85,18 @@ def initNbateams():
     for i in range(50):
         id = getRandomnbateam()['id']
         addnbateamlike(id)
-
-    print(nbateams_data)
         
 # Return all jokes from nbateam_data
 def getnbateams():
-    return(nbateams_data)
+    return(nbateam_data)
 
 # nbateam getter
 def getnbateam(id):
-    return(nbateams_data[id])
+    return(nbateam_data[id])
 
 # Return next team from nbateam_data
 def getRandomnbateam():
-    return(random.choice(nbateams_data))
+    return(random.choice(nbateam_data))
 
 # Liked nbateam
 def likednbateam():
@@ -111,7 +107,7 @@ def likednbateam():
             best = id['like']
             bestID = id['team']
 
-    return nbateams_data[bestID]
+    return nbateam_data[bestID]
     
 #  Disliked nbatam
 def dislikednbateam():
@@ -121,17 +117,17 @@ def dislikednbateam():
         if id['dislike'] > worst:
             worst = id['dislike']
             worstID = id['id']
-    return nbateams_data[worstID]
+    return nbateam_data[worstID]
 
 # Add to like for requested id
 def addnbateamlike(id):
-    nbateams_data[id]['like'] = nbateams_data[id]['like'] + 1
-    return nbateams_data[id]['like']
+    nbateam_data[id]['like'] = nbateam_data[id]['like'] + 1
+    return nbateam_data[id]['like']
 
 # Add to dislike for requested id
-def addnbateamdislike(id):
-    nbateams_data[id]['dislike'] = nbateams_data[id]['dislike'] + 1
-    return nbateams_data[id]['dislike']
+def addnbateamlike(id):
+    nbateam_data[id]['dislike'] = nbateam_data[id]['dislike'] + 1
+    return nbateam_data[id]['dislike']
 
 # Pretty Print nbateam
 def printnbateam(nbateam):
@@ -139,7 +135,7 @@ def printnbateam(nbateam):
 
 # Number of teams  
 def countnbateams():
-    return len(nbateams_data)
+    return len(nbateam_data)
 
 # Test nbateam Model
 if __name__ == "__main__": 
@@ -158,25 +154,8 @@ if __name__ == "__main__":
     
     
        # Random team
-    print("Get team 3")
     printnbateam(getnbateam(3))
     
     # Random team
-    print("Random team")
     printnbateam(getRandomnbateam())
     
-    
-    # Count of teams
-    printnbateam("team name: " + str(getnbateam()))
-
- # An input is requested and stored in a variable
-# nbateams_data = input ("Enter a team: ")
-
-# # Converts the string into an integer. If you need
-# # to convert the user input into the decimal format,
-# # the float() function is used instead of int()
-
-# nbateams_data = int(test_text)
-
-# # Prints in the console the variable as requested
-# printnbateam ("The team you entered is: ", test_team)
